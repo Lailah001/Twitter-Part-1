@@ -49,11 +49,11 @@ class TweetCellTableViewCell: UITableViewCell {
     func setRetweeted(_ isRetweeted:Bool) {
         if (isRetweeted) {
             retweetButton.setImage(UIImage(named: "retweet-icon-green"), for:
-                UIControl.State.normal)
+                UIControlState.normal)
             retweetButton.isEnabled = false
         } else {
             retweetButton.setImage(UIImage(named: "retweet-icon"), for:
-                UIControl.State.normal)
+                UIControlState.normal)
             retweetButton.isEnabled = true
         }
     }
@@ -61,10 +61,10 @@ class TweetCellTableViewCell: UITableViewCell {
     func setFavorite(_ isFavorited:Bool){
         favorited = isFavorited
         if (favorited){
-            favButton.setImage(UIImage(named: "favor-icon-red"), for: UIControl.State.normal)
+            favButton.setImage(UIImage(named: "favor-icon-red"), for: UIControlState.normal)
         }
         else {
-            favButton.setImage(UIImage(named: "favor-icon"), for: UIControl.State.normal)
+            favButton.setImage(UIImage(named: "favor-icon"), for: UIControlState.normal)
         }
     }
     
