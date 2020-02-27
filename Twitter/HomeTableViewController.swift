@@ -18,6 +18,7 @@ class HomeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadTweet()
+        
         refresher.addTarget(self, action: #selector(loadTweet), for: .valueChanged)
         self.tableView.refreshControl = refresher
         self.tableView.rowHeight = UITableView.automaticDimension
@@ -31,10 +32,10 @@ class HomeTableViewController: UITableViewController {
     }
     
     @objc func loadTweet(){
-        
+        numberOfTweets = 20
         let myUrl = "https://api.twitter.com/1.1/statuses/home_timeline.json"
-        //let myParams = ["count": numberOfTweets]
-        let myParams = ["count": 10]
+        let myParams = ["count": numberOfTweets]
+        //let myParams = ["count": 10]
         
         //TwitterAPICaller.client?.getDictionariesRequest(url: myUrl, parameters: myParams as [String : Any], success: { (tweets: [NSDictionary]) in
         TwitterAPICaller.client?.getDictionariesRequest(url: myUrl, parameters: myParams, success: { (tweets: [NSDictionary]) in
@@ -48,6 +49,7 @@ class HomeTableViewController: UITableViewController {
             self.refresher.endRefreshing()
             
         }, failure: { (Error) in
+            print("Error: \(Error.localizedDescription)")
             print("Could not retreive tweets! Oh no!")
         })
     }
@@ -55,11 +57,12 @@ class HomeTableViewController: UITableViewController {
     func loadMoreTweets() {
         let myUrl = "https://api.twitter.com/1.1/statuses/home_timeline.json"
         
-        //numberOfTweets = numberOfTweets + 20
+        numberOfTweets = numberOfTweets + 20
         
         let myParams = ["count": numberOfTweets]
         
-        TwitterAPICaller.client?.getDictionariesRequest(url: myUrl, parameters: myParams as [String : Any], success: { (tweets: [NSDictionary]) in
+        //TwitterAPICaller.client?.getDictionariesRequest(url: myUrl, parameters: myParams as [String : Any], success: { (tweets: [NSDictionary]) in
+        TwitterAPICaller.client?.getDictionariesRequest(url: myUrl, parameters: myParams, success: { (tweets: [NSDictionary]) in
             
             self.tweetArray.removeAll()
             for tweet in tweets {
